@@ -1,37 +1,35 @@
 import * as React from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 
-const Dashboard: React.FunctionComponent = () => (
+const Dashboard: React.FunctionComponent = () => {
+
+  const [currentValue, setCurrentValue] = React.useState('')
+  const [list, setList] = React.useState<String[]>([]);
+
+  const Todo = (value) => {
+    value.preventDefault();
+    setList([...list, currentValue]);
+    console.log(list);
+  }
+  return (
   <PageSection>
-    <Title headingLevel="h1" size="lg">Dashboard Page Title!</Title>
-    const [fullname, setFullname] = useState([]);
+    <h1>TODO APP</h1>
+<form className="input-box">
+<input className="input" placeholder="enter you name" onChange={(value)=>{
+  setCurrentValue(value.target.value)
+}}/>
 
-const onSubmit = (e) => {
-  
-  console.log(fullname);
-  
-}
-return (
-  <div className="App">
-<h1>TODO APP </h1>
-
-
-<form onSubmit={onsubmit}>
-<input type="text"
-value={fullname}
-placeholder="Enter your name"
-onChange= {setFullname}/>
-
-<div>
-<button type="submit" onClick={onSubmit}>submit</button>
-</div>
+<button className="add-button" onClick={Todo}>Submit</button>
 
 </form>
+{list.map((singleTodo)=>{
+  return<div>{singleTodo}</div>
+})}
 
-  </div>
-);
-}
+
+
   </PageSection>
-)
 
+)
+}
 export { Dashboard };
